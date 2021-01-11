@@ -4,6 +4,7 @@ The main purpose of this network is to expose a load-balanced and monitored inst
 How this purpose is achieved
 
 Topology
+
 1This topology consists of 2 virtual networks, A & B.
 
 2 Virtual networks, A & B are connected with each other with peering.
@@ -32,6 +33,7 @@ Access Policies
 Public IP address of my internet 98.xxx.xxx.xxx
 • Machines with in the network including web and ELK servers can only be accessed through the Jump box.
 ELK Configuration
+
 6 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because:
 • Multiple machines can be configured and deployed simultaneously which saves time and effort.
 • Also results in accurate and consistent configuration across machines, reducing human error.
@@ -42,6 +44,7 @@ Installed the image of the container for eg, ELK..
 Published open ports
 Configured memory settings of the container
 Target Machines & Beats
+
 7 This ELK server is configured to monitor the target webservers
 • The IP addresses of the target webservers are:
 
@@ -51,14 +54,16 @@ Target Machines & Beats
 File Bea*t; is an agent and a light wait shipper that monitors and forwards log files to ELK servers for visual analytics in Kibana.
 Matric Beat; Matric beat performs a similar function of an agent, but collects and reports system/service level matrices. For example CPU,or Memory performance.
 Using the Playbook
+
 8 SSH into the control node and follow the steps below:
 • Using the following command, download the file beat configuration file on the control node.
 • curl https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat > /etc/ansible/files/filebeat-config.yml
 • Make following edits to the above downloaded file:
 
-Scroll to line #1106 and replace the IP address with the IP address of the ELK machine(40.77.20.19).
-Scroll to line #1806 and replace the IP address with the IP address of the ELK machine(40.77.20.19).
-Save this file in /etc/ansible/files/filebeat-config.yml.
+- Scroll to line #1106 and replace the IP address with the IP address of the ELK machine(40.77.20.19).
+- Scroll to line #1806 and replace the IP address with the IP address of the ELK machine(40.77.20.19).
+- Save this file in /etc/ansible/files/filebeat-config.yml.
+
 9 Create a new playbook as explained in the steps below:
 • Install the .deb file using the dpkg command dpkg -i filebeat-7.4.0-amd64.deb
 • Copy the /etc/ansible/files/filebeat-config.yml, to target VM ( web servers).
